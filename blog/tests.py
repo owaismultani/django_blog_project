@@ -45,6 +45,27 @@ class TestPage(TestCase):
         self.assertContains(response, self.body)
         self.assertTemplateUsed(response, 'blog_detail_template.html')
 
+    def test_create_blog(self):
+        response = self.client.post(reverse('new_blog'), {
+            "title": self.title,
+            "author": self.username,
+            "body": self.body
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.title)
+
+    def test_update_blog(self):
+        response = self.client.post(reverse("update_blog", args='1'),{
+            "title": self.title + " (edited)"
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.title + " (edited)")
+
+    def test_delete_blog(self):
+        response = self.client.get(reverse("delete_blog", args='1'))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self.title)
+
 
 
 

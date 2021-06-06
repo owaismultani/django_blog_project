@@ -4,9 +4,10 @@
 {{object.title}}
 {% endblock title %}
 
-
-
 {% block body %}
+
 <h2>  {{object.title}} </h2>
 <p> {{object.body}} </p>
+<footer><b><a href="{% url 'update_blog' object.pk %}">Edit Blog</a></b></footer>
+<footer><b><a href="{% url 'delete_blog' object.pk %}">Delete Blog</a></b></footer>
 {% endblock body %}
